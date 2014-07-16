@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/foundation.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,700' rel='stylesheet' type='text/css'>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<style>
+	* {
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+  background: #f5f5f5 url("img/city.jpg") center;
+  font-family: 'Open Sans', sans-serif;
+  color: #353535;
+}
+.bespoke-parent {
+  -webkit-perspective: 600;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+section {
+  width: 900px;
+  height: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -450px;
+  margin-top: -300px;
+  border-left: 15px solid #21b384;
+  -webkit-transform: none;
+  opacity: 0;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+section.bespoke-slide {
+  -webkit-transition: all 0.5s ease-out;
+  opacity: 0;
+}
+section.bespoke-active {
+  opacity: 1;
+  -webkit-transition-delay: .3s;
+  z-index: 1;
+}
+section.bespoke-inactive {
+  opacity: 0;
+}
+section.bespoke-before {
+  -webkit-transform: translateX(-100%);
+  opacity: 0;
+  z-index: 2;
+}
+section.bespoke-after {
+  -webkit-transform: translateX(50%);
+}
+.slidebg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  opacity: 0.8;
+}
+h1.title {
+  /*position: absolute;*/
+  padding: 100px;
+  line-height: 80px;
+  font-size: 80px;
+}
+h2.title {
+  position: absolute;
+  padding: 60px 40px;
+  line-height: 48px;
+  font-size: 48px;
+}
+h2.title.small-block {
+  display: inline-block;
+  width: 550px;
+  line-height: 75px;
+}
+.claim {
+  background-color: #21b384;
+  color: #f5f5f5;
+  font-size: 48px;
+  font-weight: 300;
+  font-style: italic;
+  padding: 20px;
+  display: inline-block;
+  -webkit-transform: skew(0, -2deg);
+  -moz-transform: skew(0, -2deg);
+  -ms-transform: skew(0, -2deg);
+  -o-transform: skew(0, -2deg);
+  transform: skew(0, -2deg);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.keyword {
+  color: #21b384;
+  font-weight: bold;
+}
+.content {
+  position: absolute;
+  bottom: 100px;
+  font-size: 23pt;
+  right: 0;
+  padding-right: 40px;
+  margin-left: 80px;
+  line-height: 1.3em;
+}
+.content.italic {
+  font-weight: 300;
+  font-style: italic;
+}
+.content > .icons {
+  font-size: 60px;
+  background-color: #21b384;
+  color: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+}
+img.logo {
+  width: 750px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+a:visited,
+a:active,
+a:link,
+a:hover {
+  color: #21b384;
+}
+path, circle {
+  fill: #e00;
+}
+video {
+  height: 455px;
+}
+.text-center {
+  text-align: center;
+}
+.badge {
+  display: inline-block;
+  min-width: 90px;
+  padding: 20px;
+  font-size: 50px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #21b384;
+  border-radius: 50px;
+}
+.progress {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px 0px inset;
+  background-color: rgb(200, 200, 200);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px 0px inset;
+  box-sizing: border-box;
+  color: rgb(85, 85, 85);
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 800px;
+}
+.progress-bar {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.14902) 0px -1px 0px 0px inset;
+  -webkit-transition-delay: 0s;
+  -webkit-transition-duration: 0.6s;
+  -webkit-transition-property: width;
+  -webkit-transition-timing-function: ease;
+  background-color: #21b384;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px -1px 0px 0px inset;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  display: block;
+  float: left;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  transition-delay: 0s;
+  transition-duration: 0.6s;
+  transition-property: width;
+  transition-timing-function: ease;
+}
+
+
+/*------------------------------------
+ timeline styles
+------------------------------------*/
+.path-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.path-container .path-item h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.path-container .path-item h3 {
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
+.path-container .path-item p {
+  font-size: emCalc(16px);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.path-container .path-item a {
+  font-weight: bold;
+  font-size: emCalc(14px);
+}
+.path-container .path-item .circle {
+  background-color: #21b384;
+  background-size: 75px 75px;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  position: relative;
+  margin-bottom: 70px;
+  z-index: 2;
+}
+.path-container .path-item .circle.circle-left {
+  left: 20px;
+}
+.path-container .path-item .circle.circle-right {
+  right: 20px;
+}
+.path-container .line {
+  background: #ddd;
+  width: 2px;
+  bottom: 0;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  z-index: 0;
+  height: 500px;
+}
+.path-container  .path-item i {
+  padding: 20px;
+  font-size: 38px;
+  color: #f5f5f5;
+}
+
+
+</style>
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+	<article id="presentation">
+    <section class="text-center">
+      <!-- <h1 class="title">Social to Crowd</h1> -->
+      <img src="img/logo.png" class="logo" alt="Logo Social to Crowd" />
+      <span class="claim">El crowdfunding de las cosas</span>
+    </section>
+    <section>
+		  <h2 class="title">Intro</h2>
+			<div class="content">
+        <span class="keyword">Social to Crowd</span> pretende ser una plataforma destinada a organizaciones sociales con necesidades materiales para llevar a cabo sus distintos proyectos.
+      </div>
+		</section>
+ 		<section>
+			<h2 class="title">Las claves del proyecto</h2>
+			<div class="content">
+        <span class="badge">1</span>
+        <span class="badge">2</span>
+        <span class="badge">3</span>
+      </div>
+		</section>
+ 		<section>
+			<h2 class="title small-block">Transparencia en las donaciones</h2>
+			<div class="content">
+        <span class="badge">1</span>
+      </div>
+		</section>
+    <section>
+      <h2 class="title small-block">Reutilización y reciclaje de materiales</h2>
+      <div class="content">
+        <span class="badge">2</span>
+      </div>
+    </section>
+    <section>
+      <h2 class="title small-block">Nuevos modelos a la dependencia económica</h2>
+      <div class="content">
+        <span class="badge">3</span>
+      </div>
+    </section>
+    <section>
+      <h2 class="title">Cómo funciona</h2>
+      <div class="content">
+        <div class="icons">
+          <i class="fa fa-plus"></i>
+          <i class="fa fa-share-alt"></i>
+          <i class="fa fa-thumbs-up"></i>
+          <i class="fa fa-truck"></i>
+        </div>
+      </div>
+    </section>
+    <section>
+        <div class="path-container">
+          <div class="row path-item">
+            <div class="large-7 push-5 columns">
+              <div class="circle circle-left ">
+                <i class="fa fa-plus"></i>
+              </div>
+            </div>
+            <div class="large-5 pull-7 columns path-text left">
+              <h3>Crear el proyecto</h3>
+              <p>Cualquier organización social podrá dar de alta un proyecto en la plataforma para mostrar objetivos y listado de necesidades</p>
+            </div>
+          </div>
+          <div class="row path-item">
+            <div class="large-7 columns">
+              <div class="circle circle-right right">
+                <i class="fa fa-share-alt"></i>
+              </div>
+            </div>
+            <div class="large-5 columns path-text right">
+              <h3>Campaña</h3>
+              <p>Mediante difusión se permitirá recopilar apoyos y el material necesario</p>
+            </div>
+          </div>
+          <div class="row get-feedback path-item">
+            <div class="large-7 push-5 columns">
+              <div class="circle circle-left">
+                <i class="fa fa-thumbs-up"></i>
+              </div>
+            </div>
+            <div class="large-5 pull-7 columns path-text left">
+              <h3>Apoyar el proyecto</h3>
+              <p>Cualquier ciudadano podrá contribuir con materiales de forma anónima y descentralizada</p>
+            </div>
+          </div>
+          <div class="row land-job path-item">
+            <div class="large-7 columns">
+              <div class="circle circle-right right">
+                <i class="fa fa-truck"></i>
+              </div>
+            </div>
+            <div class="large-5 columns path-text right">
+              <h3>Recibir el material</h3>
+              <p>Se mostrará si el material se ha enviado y recibido, facilitando además en envío</p>
+            </div>
+          </div>
+          <span class="line hide-for-small"></span>
+        </div>
+    </section>
+    <section>
+      <h2 class="title">Estamos en <a href="http://goteo.org/project/social-to-crowd"><img src="img/goteo.png" alt="Logo de Goteo" width="180px"></a></h2>
+      <div class="content italic">
+        <span class="keyword">100%</span> conseguido del <strong>mínimo</strong>
+        <div class="progress">
+          <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+        <br>
+        <br>
+        <span class="keyword">80%</span> conseguido del <strong>óptimo</strong>
+        <div class="progress">
+          <div class="progress-bar" style="width: 80%;"></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="title">Quién está detrás</h2>
+      <div class="content">
+        <div class="row">
+          <div class="large-8 large-offset-2 columns text-center">
+            <a href="http://enreda.coop/" target="_blank"><img width="500px" src="img/logo-enreda.png" alt="Logo Wadobo" /></a>
+            <br><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-6 columns text-center">
+            <a href="http://wadobo.com/" target="_blank"><img width="200px" src="img/wadobo-green.png" alt="Logo Wadobo" /></a>
+          </div>
+          <div class="large-6 columns text-center">
+            <a href="http://cuartosector.coop/" target="_blank"><img width="200px" src="img/logo-cuarto-sector.png" alt="Logo Cuarto Sector" /></a>
+          </div>
+        </div>
+    </section>
+    <section>
+      <div class="row">
+        <div class="large-8 large-offset-2 columns">
+          <img src="img/logo.png" class="logo" alt="Logo Social to Crowd" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-7 columns text-center">
+          <h2 style="font-size: 48px;font-weight: 300;font-style: italic;">Gracias!</h2>
+        </div>
+        <div class="large-5 columns">
+          <h4><a href="http://socialtocrowd.org" target="_blank">WWW/SocialToCrowd</a></h4>
+          <h4><a href="http://goteo.org/project/social-to-crowd" target="_blank">GOTEO/SocialToCrowd</a></h4>
+          <h4><a href="http://twitter.com/SocialToCrowd" target="_blank">@SocialToCrowd</a></h4>
+          <h4><a href="https://www.facebook.com/socialtocrowd" target="_blank">FB/SocialToCrowd</a></h4>
+        </div>
+      </div>
+      </div>
+    </section>
+	</article>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+	<script src="js/vendor/bespoke.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!--<script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>-->
+    </body>
+</html>
